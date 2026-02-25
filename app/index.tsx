@@ -36,7 +36,7 @@ export default function App() {
             onPress={() => Haptics.selectionAsync()}
           >
             <Text style={styles.text1}>{obtenerSaludo()}</Text>
-            <Text style={styles.title1}>José Rangel</Text>
+            <Text style={styles.title1}>Usuario</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.userBoxPhoto}>
@@ -45,7 +45,7 @@ export default function App() {
             onPress={() => Haptics.selectionAsync()}
           >
             <View style={styles.avatar}>
-              <FontAwesome name="user" size={40} color="black" />
+              <FontAwesome name="user" size={40} color="#ffffff" />
             </View>
           </TouchableOpacity>
         </View>
@@ -57,13 +57,17 @@ export default function App() {
 
           <TextInput
             placeholder="Buscar café..."
+            placeholderTextColor="black"
             value={search}
             onChangeText={setSearch}
             style={styles.input}
           />
         </View>
-        <TouchableOpacity style={styles.filterButton}>
-          <Ionicons name="options-outline" size={22} color="#fff" />
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => Haptics.selectionAsync()}
+        >
+          <Ionicons name="options-outline" size={40} color="#fff" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -97,8 +101,8 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     borderWidth: 2,
-    borderColor: "#d9d9d9",
-    backgroundColor: "#d9d9d9",
+    borderColor: "#00704A",
+    backgroundColor: "#00704A",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
   },
   filterButton: {
     marginLeft: 10,
-    backgroundColor: "#6F4E37",
+    backgroundColor: "#00704A",
     height: 60,
     width: 60,
     borderRadius: 10,
