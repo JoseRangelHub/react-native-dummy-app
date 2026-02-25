@@ -1,7 +1,15 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
   const obtenerSaludo = () => {
@@ -16,49 +24,67 @@ export default function App() {
     }
   };
 
+  const [search, setSearch] = useState("");
+
   return (
-    <View style={styles.userBox}>
-      <View style={styles.userBoxText}>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => Haptics.selectionAsync()}
-        >
-          <Text style={styles.text1}>{obtenerSaludo()}</Text>
-          <Text style={styles.title1}>José Rangel</Text>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="dark" />
+      <View style={styles.userBox}>
+        <View style={styles.userBoxText}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => Haptics.selectionAsync()}
+          >
+            <Text style={styles.text1}>{obtenerSaludo()}</Text>
+            <Text style={styles.title1}>José Rangel</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.userBoxPhoto}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => Haptics.selectionAsync()}
+          >
+            <View style={styles.avatar}>
+              <FontAwesome name="user" size={40} color="black" />
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <View style={styles.searchBox}>
+        <View style={styles.searchBoxInput}>
+          <Ionicons name="search" size={30} color="#999" />
+
+          <TextInput
+            placeholder="Buscar café..."
+            value={search}
+            onChangeText={setSearch}
+            style={styles.input}
+          />
+        </View>
+        <TouchableOpacity style={styles.filterButton}>
+          <Ionicons name="options-outline" size={22} color="#fff" />
         </TouchableOpacity>
       </View>
-      <View style={styles.userBoxPhoto}>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => Haptics.selectionAsync()}
-        >
-          <View style={styles.avatar}>
-            <FontAwesome name="user" size={40} color="black" />
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+  },
   userBox: {
     flexDirection: "row",
-    backgroundColor: "#ffffff",
-    borderColor: "#ffffff",
-    borderWidth: 2,
     marginTop: 50,
   },
   userBoxText: {
     flex: 1,
-    borderColor: "#ffffff",
-    borderWidth: 2,
     paddingStart: 30,
   },
   userBoxPhoto: {
     flex: 1,
-    borderColor: "#ffffff",
-    borderWidth: 2,
     width: "auto",
     justifyContent: "center",
     alignItems: "flex-end",
@@ -71,8 +97,8 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     borderWidth: 2,
-    borderColor: "lightgrey",
-    backgroundColor: "lightgrey",
+    borderColor: "#d9d9d9",
+    backgroundColor: "#d9d9d9",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -82,5 +108,37 @@ const styles = StyleSheet.create({
   title1: {
     fontSize: 22,
     fontWeight: "bold",
+  },
+  searchBox: {
+    flexDirection: "row",
+    marginTop: 15,
+    alignItems: "center",
+    paddingHorizontal: 10,
+    height: 80,
+  },
+  searchBoxInput: {
+    flexDirection: "row",
+    marginLeft: 16,
+    alignItems: "center",
+    backgroundColor: "#d9d9d9",
+    borderRadius: 10,
+    height: 60,
+    width: 260,
+    paddingHorizontal: 10,
+  },
+  input: {
+    flex: 1,
+    marginLeft: 3,
+    fontSize: 18,
+    color: "black",
+  },
+  filterButton: {
+    marginLeft: 10,
+    backgroundColor: "#6F4E37",
+    height: 60,
+    width: 60,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
